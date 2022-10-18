@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 16:26:07 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/18 17:56:50 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,18 @@ typedef struct  s_fractol
     double  max_rx;
     double  min_iy;
     double  max_iy;
+    double  cr;
+    double  ci;
     int fractal;
     t_image mlx_img;
     t_gen   gen;
     t_color color;
 }           t_fractol;
 
-
 void    screen_display(t_fractol *data);
 int add_pixel(t_fractol *data, int x, int y, int color);
 
+// -------------------- Event ----------------------------- // 
 int keypressed(int keysym, t_fractol *data);
 int keyrelease(int keysym, t_fractol *data);
 
@@ -89,15 +91,14 @@ int no_event(t_fractol *data);
 void    image_display(t_fractol *data);
 void    set_color(t_fractol *data, int x, int y, int n);
 void    set_color_shift(t_fractol *data, int x, int y, int n, int keysym);
-int render(t_fractol *data);
-int set_mandelbrot(t_fractol *data);
+void    render(t_fractol *data);
 
 // ------------------------ Utils ------------------------- //
 void    clear_all(t_fractol *data);
 int check_set(char *av, char *set);
 void    print_arg();
-void    init_fractal(t_fractol *data, t_gen *val);
-void    init_value(t_fractol *data, t_gen *val, t_image *mlx, char **av);
+int check_arg(t_fractol *data);
+void    init_value(t_fractol *data, char **av);
 int render_shift(t_fractol *data, int keysym);
 double	ft_atod(const char *nptr);
 

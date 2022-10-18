@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:41:51 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 14:28:07 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:13:44 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void    ft_zoom(t_fractol *data, double zoom)
 {
-    double  cr;
     double  ci;
+    double  cr;
     
     ci = data->min_iy - data->max_iy;
     cr = data->min_rx - data->max_rx;
@@ -28,8 +28,8 @@ void    ft_zoom(t_fractol *data, double zoom)
 
 void    move(t_fractol *data, double move, char movement)
 {
-    double  cr;
     double  ci;
+    double  cr;
     
     cr = data->min_rx - data->max_rx;
     ci = data->max_iy - data->min_iy;

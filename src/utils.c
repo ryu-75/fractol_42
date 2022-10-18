@@ -6,31 +6,31 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 16:21:33 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:19:42 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void    init_value(t_fractol *data, t_gen *val, t_image *mlx, char **av)
+void    init_value(t_fractol *data, char **av)
 {
-    val->x = 0;
-    val->y = 0;
-    val->zi = 0;
-    val->zr = 0;
-    val->pr = 0;
-    val->pi = 0;
-    val->tmp = 0;
-    mlx->size_line = 0;
-    mlx->bpp = 0;
-    mlx->endian = 0;
+    data->gen.x = 0;
+    data->gen.y = 0;
+    data->gen.zi = 0;
+    data->gen.zr = 0;
+    data->gen.pr = 0;
+    data->gen.pi = 0;
+    data->gen.tmp = 0;
+    data->mlx_img.size_line = 0;
+    data->mlx_img.bpp = 0;
+    data->mlx_img.endian = 0;
     data->av = av;
     data->min_rx = 0;
     data->min_iy = 0;
     data->max_rx = 0;
     data->max_iy = 0;
-    val->ki = 0;
-    val->kr = 0;
+    data->gen.ki = 0;
+    data->gen.kr = 0;
 }
 
 int check_set(char *av, char *set)
@@ -51,6 +51,24 @@ void    print_arg()
 {
     ft_putstr_fd("Expected: ./fractol mandelbrot\n", 2);
     ft_putstr_fd("Expected: ./fractol julia\n", 2);
+}
+
+int check_arg(t_fractol *data)
+{
+    int size;
+
+    size = ft_strlen(data->av[1]);
+    if ((data->av)[1] && !ft_strncmp((data->av)[1], "mandelbrot", 10) && size == 10)
+        return (0);
+    else if ((data->av)[1] && !ft_strncmp((data->av)[1], "julia", 5) && size == 5)
+        return (1);
+    else
+    {
+        ft_putstr_fd("Error: Invalid arguments\n", 2);
+        print_arg();
+        exit(0);
+    }
+    return (0);
 }
 
 double  ft_atod(const char *nptr)

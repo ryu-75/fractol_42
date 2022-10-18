@@ -15,7 +15,6 @@ SRC						= $(DIR_SRC)/main.c		\
 							$(DIR_SRC)/utils.c		\
 							$(DIR_SRC)/color.c		\
 							$(DIR_SRC)/event.c		\
-							$(DIR_SRC)/render.c		\
 							$(DIR_SRC)/action.c
 							
 OBJ						= $(SRC:.c=.o)

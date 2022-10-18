@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 15:22:53 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:26:49 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int keypressed(int keysym, t_fractol *data)
         return (0);
     }
     else if (keysym == ZOOM)
-        ft_zoom(data, 0.05);
+        ft_zoom(data, 0.5);
     else if (keysym == DEZOOM)
         ft_zoom(data, 1.2);
     else if (keysym == KEY_UP)
@@ -49,8 +49,8 @@ int keypressed(int keysym, t_fractol *data)
     //     change_fractal(int keysym, t_fractol *data, char **av);
     //     return (0);
     // }
-    printf("test1\n");
-    // render(data);
+    printf("%f\n", data->max_rx);
+    render(data);
     return (0);
 }
 
@@ -58,7 +58,7 @@ int keymouse(int keysym, t_fractol *data, int x, int y)
 {
     if (keysym == MOUSE_UP)
     {
-            ft_zoom(data, 0.05);
+            ft_zoom(data, 0.5);
             x -= WIDTH / 2;
             y -= HEIGHT / 2;
             if (x < 0)
@@ -72,7 +72,7 @@ int keymouse(int keysym, t_fractol *data, int x, int y)
     }
     else if (keysym == MOUSE_DOWN)
         ft_zoom(data, 1.2);
-    set_mandelbrot(data);
+    render(data);
     return (0);
 }
 

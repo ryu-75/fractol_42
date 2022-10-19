@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 17:56:50 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:56:42 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 # define    MLX_ERROR 1
 # define    WHITE 0x00FFFFFF
 # define    BLACK 0x00000000
-# define    BLUE 0x0003e8fc
+# define    BLUE 0x000CAAE8
 # define    PRUNE 0x007e1045
+# define    PINK 0x00E600D6
 
 typedef struct s_color
 {
@@ -85,7 +86,6 @@ int keyrelease(int keysym, t_fractol *data);
 // -------------------- Close windows --------------------- //
 int close_hook(t_fractol *data);
 void    close_win(t_fractol *data);
-int no_event(t_fractol *data);
 
 // -------------------- Display --------------------------- //
 void    image_display(t_fractol *data);
@@ -99,7 +99,6 @@ int check_set(char *av, char *set);
 void    print_arg();
 int check_arg(t_fractol *data);
 void    init_value(t_fractol *data, char **av);
-int render_shift(t_fractol *data, int keysym);
 double	ft_atod(const char *nptr);
 
 // ---------------------- Action -------------------------- //
@@ -108,4 +107,7 @@ void    move(t_fractol *data, double move, char movement);
 int keymouse(int keysym, t_fractol *data, int x, int y);
 int mouse_pos(int keysym, t_fractol *data, int x, int y);
 void    change_fractal(int keysym, t_fractol *data);
+
+int fractal_value(t_fractol *data);
+void    ft_reinit(t_fractol *data);
 #endif

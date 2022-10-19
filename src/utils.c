@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 18:19:42 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/19 14:11:01 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,4 @@ double  ft_atod(const char *nptr)
 	}
 	return (result * sign);
 }
+

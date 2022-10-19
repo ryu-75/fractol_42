@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 18:26:49 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/19 16:08:33 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 int close_hook(t_fractol *data)
 {
     mlx_loop_end(data->ptr);
-    return (0);
-}
-
-int no_event(t_fractol *data)
-{
-    (void) data;
     return (0);
 }
 
@@ -44,12 +38,6 @@ int keypressed(int keysym, t_fractol *data)
         move(data, -0.08, 'L');
     else if (keysym == KEY_RIGHT)
         move(data, -0.08, 'R');
-    // if (keysym == TOUCH_1 || keysym == TOUCH_2)
-    // {
-    //     change_fractal(int keysym, t_fractol *data, char **av);
-    //     return (0);
-    // }
-    printf("%f\n", data->max_rx);
     render(data);
     return (0);
 }
@@ -58,17 +46,17 @@ int keymouse(int keysym, t_fractol *data, int x, int y)
 {
     if (keysym == MOUSE_UP)
     {
-            ft_zoom(data, 0.5);
-            x -= WIDTH / 2;
-            y -= HEIGHT / 2;
-            if (x < 0)
-                move(data, (double)x * -1 / WIDTH, 'L');
-            else if (x > 0)
-                move(data, (double)x / WIDTH, 'R');
-            if (y < 0)
-                move(data, (double)y * -1 / HEIGHT, 'U');
-            else if (y > 0)
-                move(data, (double)y / HEIGHT, 'D');
+        x -= WIDTH / 2;
+        y -= HEIGHT / 2;
+        ft_zoom(data, 0.5);
+        if (x < 0)
+            move(data, (double)x * -1 / WIDTH, 'L');
+        else if (x > 0)
+            move(data, (double)x / WIDTH, 'R');
+        if (y < 0)
+            move(data, (double)y * -1 / HEIGHT, 'U');
+        else if (y > 0)
+            move(data, (double)y / HEIGHT, 'D');
     }
     else if (keysym == MOUSE_DOWN)
         ft_zoom(data, 1.2);

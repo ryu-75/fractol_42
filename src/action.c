@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:41:51 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/18 18:13:44 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:45:36 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void    ft_zoom(t_fractol *data, double zoom)
     data->min_rx = data->min_rx + zoom * cr;
     data->min_iy = data->min_iy + zoom * ci;
     data->max_iy = data->max_iy + (ci - zoom * ci) / 2;
+    printf("max rx: %f\nmin rx: %f\nmax iy : %f\nmin iy :%f\n\n", data->max_rx, data->min_rx, data->max_iy, data->min_iy);
 }
 
 void    move(t_fractol *data, double move, char movement)

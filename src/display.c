@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:59:36 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/04 12:17:24 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/20 12:51:36 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void    screen_display(t_fractol *data)
 {    
     data->ptr = mlx_init();
-    data->win = mlx_new_window(data->ptr, WIDTH, HEIGHT, "fractol");
-    if (data->ptr == NULL)
-        exit(MLX_ERROR);
-    if (data->win == NULL)
+    data->win = mlx_new_window(data->ptr, data->w, data->h, "fractol");
+    if (data->ptr == NULL || data->win == NULL)
     {
         free(data->ptr);
         exit(MLX_ERROR);
@@ -27,7 +25,7 @@ void    screen_display(t_fractol *data)
 
 void    image_display(t_fractol *data)
 {
-    data->mlx_img.img = mlx_new_image(data->ptr, WIDTH, HEIGHT);
+    data->mlx_img.img = mlx_new_image(data->ptr, data->w, data->h);
     if (data->mlx_img.img == NULL)
         exit (MLX_ERROR);
     data->mlx_img.addr = mlx_get_data_addr(data->mlx_img.img, 

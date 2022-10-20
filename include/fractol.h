@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/19 15:56:42 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:41:28 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define    WIDTH 900
-# define    HEIGHT 900
 # define    MAX_ITERATION 100
 # define    MLX_ERROR 1
 # define    WHITE 0x00FFFFFF
@@ -52,8 +50,6 @@ typedef struct s_gen
     int y;
     double  zi;
     double  zr;
-    double  ki;
-    double  kr;
     double  pr;
     double  pi;
     double  tmp;
@@ -70,6 +66,9 @@ typedef struct  s_fractol
     double  max_iy;
     double  cr;
     double  ci;
+    double  julia_set[2];
+    int w;
+    int h;
     int fractal;
     t_image mlx_img;
     t_gen   gen;
@@ -107,7 +106,7 @@ void    move(t_fractol *data, double move, char movement);
 int keymouse(int keysym, t_fractol *data, int x, int y);
 int mouse_pos(int keysym, t_fractol *data, int x, int y);
 void    change_fractal(int keysym, t_fractol *data);
-
+int keymove(int keysym, t_fractol *data);
 int fractal_value(t_fractol *data);
 void    ft_reinit(t_fractol *data);
 #endif

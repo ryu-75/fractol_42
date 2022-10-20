@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/19 14:11:01 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:07:53 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void    init_value(t_fractol *data, char **av)
     data->gen.tmp = 0;
     data->mlx_img.size_line = 0;
     data->mlx_img.bpp = 0;
-    data->mlx_img.endian = 0;
+    data->mlx_img.endian = 1;
     data->av = av;
     data->min_rx = 0;
     data->min_iy = 0;
     data->max_rx = 0;
     data->max_iy = 0;
-    data->gen.ki = 0;
-    data->gen.kr = 0;
+    data->h = 900;
+    data->w = 900;
 }
 
 int check_set(char *av, char *set)

@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:40:21 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 15:22:43 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 17:58:48 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ void    set_color(t_fractol *data, int x, int y, int n)
     t_color color;
 
     color.p_color = rgb;
-    blue = WHITE * n / 2 + BLUE + PINK;
+    blue = WHITE * n / 64 * 2 + BLUE + PINK + BLUE;
     if (n == MAX_ITERATION)
-        color.p_color[n] = add_pixel(data, x, y, BLACK);
+        color.p_color[n + 1] = add_pixel(data, x, y, BLACK);
     else if (n >= 0 && n < MAX_ITERATION / 2)
     {
         color.p_color[n + 2] = add_pixel(data, x, y, blue);
-        if (n >= 20 && n < MAX_ITERATION / 2)
-            color.p_color[n + 3] = add_pixel(data, x, y, WHITE);
+
     }
 }

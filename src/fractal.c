@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:45:25 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 15:51:05 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:16:52 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void    get_complex_values(t_fractol *data)
 {
     if (data->fractal == MANDELBROT)
     {
-        // data->zi = 0;
-        // data->zr = 0;
         data->min_rx = -2.0;
         data->max_rx = 1;
         data->min_iy = -1.5;
@@ -58,6 +56,44 @@ void    get_complex_values(t_fractol *data)
         data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
         data->zr = -0.9966667;
         data->zi = 0.0066667;
+    }
+}
+
+void    change_fractal(t_fractol *data, int keysym)
+{
+    if (keysym == TOUCH_1)
+    {
+        data->fractal = MANDELBROT;
+        get_complex_values(data);
+    }
+    else if (keysym == TOUCH_2)
+    {
+        data->fractal = JULIA;
+        get_complex_values(data);
+    }
+}
+
+void    complex_julia(t_fractol *data, int keysym)
+{
+    if (keysym == F1)
+    {
+        data->zr = -0.9966667;
+        data->zi = 0.0066667;
+    }
+    else if (keysym == F2)
+    {
+        data->zr = -0.1200;
+        data->zi = 0.7700;
+    }
+    else if (keysym == F3)
+    {
+        data->zr = 0.315;
+        data->zi = 0.015;       
+    }
+    else if (keysym == F4)
+    {
+        data->zr = -0.737;
+        data->zi = 0.102;
     }
 }
 

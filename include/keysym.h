@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:29:51 by sasha             #+#    #+#             */
-/*   Updated: 2022/10/17 14:59:08 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 17:01:25 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@
 # define    KEY_RIGHT 65363
 # define    TOUCH_1 65436
 # define    TOUCH_2 65433
-
+# define    F1 49
+# define    F2 50
+# define    F3 51
+# define    F4 52
 #endif

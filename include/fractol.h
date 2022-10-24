@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 15:36:49 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:14:42 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define    MAX_ITERATION 100
+# define    MAX_ITERATION 300
 # define    MLX_ERROR 1
 # define    WHITE 0x00FFFFFF
 # define    BLACK 0x00000000
@@ -49,17 +49,8 @@ typedef struct s_image
     int endian;
 }           t_image;
 
-typedef struct s_gen
-{
-    int x;
-    int y;
-    double  pr;
-    double  pi;
-}           t_gen;
-
 typedef struct  s_fractol
 {
-    char    **av;
     void        *ptr;
     void        *win;
     double  min_rx;
@@ -77,7 +68,6 @@ typedef struct  s_fractol
     int n;
     int fractal;
     t_image mlx_img;
-    t_gen   gen;
     t_color color;
 }           t_fractol;
 
@@ -95,7 +85,6 @@ void    close_win(t_fractol *data);
 // -------------------- Display --------------------------- //
 void    image_display(t_fractol *data);
 void    set_color(t_fractol *data, int x, int y, int n);
-void    set_color_shift(t_fractol *data, int x, int y, int n, int keysym);
 void    render(t_fractol *data);
 
 // ------------------------ Utils ------------------------- //
@@ -103,19 +92,18 @@ void    clear_all(t_fractol *data);
 int check_set(char *av, char *set);
 void    print_arg();
 void    check_arg(t_fractol *data, char **av);
-void    init_value(t_fractol *data, char **av);
-double	ft_atod(const char *nptr);
+void    init_value(t_fractol *data);
+// double	ft_atod(const char *nptr);
 
 // ---------------------- Action -------------------------- //
 void    ft_zoom(t_fractol *data, double zoom);
 void    move(t_fractol *data, double move, char movement);
 int keymouse(int keysym, t_fractol *data, int x, int y);
 int mouse_pos(int keysym, t_fractol *data, int x, int y);
-void    change_fractal(int keysym, t_fractol *data);
+void    change_fractal(t_fractol *data, int keysym);
 int keymove(int keysym, t_fractol *data);
 int fractal_value(t_fractol *data);
 void    ft_reinit(t_fractol *data);
-void    re_render(t_fractol *data);
-
 void    get_complex_values(t_fractol *data);
+void    complex_julia(t_fractol *data, int keysym);
 #endif

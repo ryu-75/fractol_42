@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 15:54:33 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:16:32 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int keymove(int keysym, t_fractol *data)
         ft_zoom(data, 0.05);
     else if (keysym == DEZOOM)
         ft_zoom(data, 1.2);
+    complex_julia(data, keysym);
+    change_fractal(data, keysym);
     render(data);
     return (0);
 }
@@ -65,12 +67,13 @@ int keymouse(int keysym, t_fractol *data, int x, int y)
     }
     else if (keysym == MOUSE_UP)
     {
-        // scalling = 1.2;
         ft_zoom(data, 1.2);
         render(data);
     }
     return (1);
 }
+
+
 
 void    clear_all(t_fractol *data)
 {

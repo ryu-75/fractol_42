@@ -6,91 +6,88 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:45:25 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/20 15:43:11 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 15:51:05 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 #include "../include/keysym.h"
 
-void    fractal_process(t_fractol *data, t_gen *val)
+int ft_mandelbrot(t_fractol *data, double pr, double pi)
 {
-    val->pr = data->min_rx + (double)val->x * (data->max_rx - data->min_rx) / data->w;
-    val->pi = data->min_iy + (double)val->y * (data->max_iy - data->min_iy) / data->h;
-}
-
-void    ft_mandelbrot(t_fractol *data, t_gen *val)
-{
-    int n;
-
-    n = -1;
-    val->zi = 0;
-    val->zr = 0;
-    data->min_rx = -2.0;
-    data->max_rx = 1;
-    data->min_iy = -1.5;
-    data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-    fractal_process(data, val);
-    while (++n < MAX_ITERATION && (val->zi * val->zi + val->zr * val->zr) < 4.0)
+    data->n = -1;
+    data->zr = 0;
+    data->zi = 0;
+    while (++data->n < MAX_ITERATION && (data->zi * data->zi + data->zr * data->zr) < 4.0)
     {
-        val->tmp = 2 * val->zr * val->zi + val->pi;
-        val->zr = val->zr * val->zr - val->zi * val->zi + val->pr;
-        val->zi = val->tmp;
+        data->tmp = 2 * data->zr * data->zi + pi;
+        data->zr = data->zr * data->zr - data->zi * data->zi + pr;
+        data->zi = data->tmp;
     }
-    set_color(data, val->x, val->y, n);
+    return (1);
 }
 
-void    ft_julia(t_fractol *data, t_gen *val)
-{
-    int n;
-
-    n = -1;
-    data->min_rx = -2.0;
-    data->max_rx = 2.0;
-    data->min_iy = -2.0;
-    data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-    val->zr = -0.1224780;
-    val->zi = 0.7444300;
-    // julias_value(t_fractol, t_gen *val); --> Change zr and zi 
-    fractal_process(data, val);
-    while (++n < MAX_ITERATION && (val->pi * val->pi + val->pr * val->pr) < 4.0)
+int ft_julia(t_fractol *data, double pr, double pi)
+{    
+    data->n = -1;
+    while (++data->n < MAX_ITERATION && (pi * pi + pr * pr) < 4.0)
     {
-        val->tmp = 2 * val->pr * val->pi + val->zi;
-        val->pr = val->pr * val->pr - val->pi * val->pi + val->zr;
-        val->pi = val->tmp;
+        data->tmp = 2 * pr * pi + data->zi;
+        pr = pr * pr - pi * pi + data->zr;
+        pi = data->tmp;
     }
-    set_color(data, val->x, val->y, n);
-}
-// data->julia_set = {val->zr, val->zi}
-
-void    julia_value(t_fractol *data, t_gen *val, int keycode)
-{   
-    if (keycode == TOUCH_1)
-        (*data)->julia_set = {-0.1224780, 0.7444300};
+    return (1);
 }
 
-
-void    array_function(t_fractol *data, t_gen *val, int id)
+void    get_complex_values(t_fractol *data)
 {
-    void    (*ftptr[2])(t_fractol *, t_gen *);
+    if (data->fractal == MANDELBROT)
+    {
+        // data->zi = 0;
+        // data->zr = 0;
+        data->min_rx = -2.0;
+        data->max_rx = 1;
+        data->min_iy = -1.5;
+        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
+    }
+    else if (data->fractal == JULIA)
+    {
+        data->min_rx = -2.0;
+        data->max_rx = 2.0;
+        data->min_iy = -2.0;
+        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
+        data->zr = -0.9966667;
+        data->zi = 0.0066667;
+    }
+}
 
-    ftptr[0] = ft_mandelbrot;
-    ftptr[1] = ft_julia;
-
-    ((*ftptr[id])(data, val));
+void    select_fractal(t_fractol *data, double pr, double pi)
+{
+    if (data->fractal == MANDELBROT)
+        ft_mandelbrot(data, pr, pi);
+    else if (data->fractal == JULIA)
+        ft_julia(data, pr, pi);
 }
 
 void    render(t_fractol *data)
 {
-    t_gen val;
-    
-    val.y = -1;
+    double  pr;
+    double  pi;
+    int x;
+    int y;
+
+    y = -1;
     mlx_clear_window(data->ptr, data->win);
-    while (++val.y <= data->h)
+    while (++y <= data->h)
     {
-        val.x = -1;
-        while (++val.x <= data->w)
-            array_function(data, &val, check_arg(data));
+        x = -1;
+        while (++x <= data->w)
+        {
+            pr = data->min_rx + (double)x * (data->max_rx - data->min_rx) / data->w;
+            pi = data->min_iy + (double)y * (data->max_iy - data->min_iy) / data->h;
+            select_fractal(data, pr, pi);
+            set_color(data, x, y, data->n);
+        }
     }
     mlx_put_image_to_window(data->ptr, data->win, data->mlx_img.img, 0, 0);
 }

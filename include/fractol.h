@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/20 15:41:28 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 15:36:49 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,14 @@
 
 typedef struct s_color
 {
-    char   *rgb;
     int *p_color;
 }           t_color;
+
+typedef enum e_fselect
+{
+    MANDELBROT,
+    JULIA
+}           t_fselect;
 
 typedef struct s_image
 {
@@ -48,11 +53,8 @@ typedef struct s_gen
 {
     int x;
     int y;
-    double  zi;
-    double  zr;
     double  pr;
     double  pi;
-    double  tmp;
 }           t_gen;
 
 typedef struct  s_fractol
@@ -64,11 +66,15 @@ typedef struct  s_fractol
     double  max_rx;
     double  min_iy;
     double  max_iy;
+    double  zi;
+    double  zr;
+    double  tmp;
     double  cr;
     double  ci;
-    double  julia_set[2];
+    char    *rgb;
     int w;
     int h;
+    int n;
     int fractal;
     t_image mlx_img;
     t_gen   gen;
@@ -96,7 +102,7 @@ void    render(t_fractol *data);
 void    clear_all(t_fractol *data);
 int check_set(char *av, char *set);
 void    print_arg();
-int check_arg(t_fractol *data);
+void    check_arg(t_fractol *data, char **av);
 void    init_value(t_fractol *data, char **av);
 double	ft_atod(const char *nptr);
 
@@ -109,4 +115,7 @@ void    change_fractal(int keysym, t_fractol *data);
 int keymove(int keysym, t_fractol *data);
 int fractal_value(t_fractol *data);
 void    ft_reinit(t_fractol *data);
+void    re_render(t_fractol *data);
+
+void    get_complex_values(t_fractol *data);
 #endif

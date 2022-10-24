@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/20 14:07:53 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 15:36:36 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void    init_value(t_fractol *data, char **av)
 {
     data->gen.x = 0;
     data->gen.y = 0;
-    data->gen.zi = 0;
-    data->gen.zr = 0;
+    data->zi = 0;
+    data->zr = 0;
     data->gen.pr = 0;
     data->gen.pi = 0;
-    data->gen.tmp = 0;
+    data->tmp = 0;
     data->mlx_img.size_line = 0;
     data->mlx_img.bpp = 0;
-    data->mlx_img.endian = 1;
+    data->mlx_img.endian = -1;
     data->av = av;
     data->min_rx = 0;
     data->min_iy = 0;
@@ -53,22 +53,21 @@ void    print_arg()
     ft_putstr_fd("Expected: ./fractol julia\n", 2);
 }
 
-int check_arg(t_fractol *data)
+void    check_arg(t_fractol *data, char **av)
 {
     int size;
 
-    size = ft_strlen(data->av[1]);
-    if ((data->av)[1] && !ft_strncmp((data->av)[1], "mandelbrot", 10) && size == 10)
-        return (0);
-    else if ((data->av)[1] && !ft_strncmp((data->av)[1], "julia", 5) && size == 5)
-        return (1);
+    size = ft_strlen(av[1]);
+    if (av[1] && !ft_strncmp(av[1], "mandelbrot", 10) && size == 10)
+        data->fractal = MANDELBROT;
+    else if (av[1] && !ft_strncmp(data->av[1], "julia", 5) && size == 5)
+        data->fractal = JULIA;
     else
     {
         ft_putstr_fd("Error: Invalid arguments\n", 2);
         print_arg();
         exit(0);
     }
-    return (0);
 }
 
 double  ft_atod(const char *nptr)

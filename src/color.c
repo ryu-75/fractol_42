@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:40:21 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/20 12:55:13 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/24 15:22:43 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 #include "../include/keysym.h"
 int add_pixel(t_fractol *data, int x, int y, int color)
 {
-    t_color colors;
-
-    colors.rgb = data->mlx_img.addr + (y * data->mlx_img.size_line + x * data->mlx_img.bpp / 8); 
-    if (data->mlx_img.endian == 1)
+    
+    // colors = 0;
+    // int colors;
+    data->rgb = data->mlx_img.addr + (y * data->mlx_img.size_line + x * data->mlx_img.bpp / 8); 
+    if (data->mlx_img.endian == 0)
     {
-        colors.rgb[0] = (color) & 0xFF;
-        colors.rgb[1] = (color >> 8) & 0xFF;
-        colors.rgb[2] = (color >> 16) & 0xFF;
-        colors.rgb[3] = (color >> 24) & 0xFF;
+        data->rgb[0] = (color) & 0xFF;
+        data->rgb[1] = (color >> 8) & 0xFF;
+        data->rgb[2] = (color >> 16) & 0xFF;
+        // colors = 0xFF << 24 | data->rgb[2] << 16 | data->rgb[1] << 8 | data->rgb[0];
     }
-    else
+    else if (data->mlx_img.endian == 1)
     {
-        colors.rgb[0] = (color) & 0xFF;         // b
-        colors.rgb[1] = (color >> 8) & 0xFF;    // g
-        colors.rgb[2] = (color >> 16) & 0xFF;   // r
-        colors.rgb[3] = (color >> 24) & 0xFF;   // f
+        data->rgb[2] = (color) & 0xFF;         // b
+        data->rgb[1] = (color >> 8) & 0xFF;    // g
+        data->rgb[0] = (color >> 16) & 0xFF;   // r
+        // colors = 0xFF << 24 | data->rgb[0] << 16 | data->rgb[1] << 8 | data->rgb[2];
     }
     return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 18:14:42 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/25 15:01:41 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define    BLUE 0x000CAAE8
 # define    PRUNE 0x007e1045
 # define    PINK 0x00E600D6
+# define    YELLOW 0x00FFE600
 
 typedef struct s_color
 {
@@ -37,7 +38,8 @@ typedef struct s_color
 typedef enum e_fselect
 {
     MANDELBROT,
-    JULIA
+    JULIA,
+    BURNING_SHIP
 }           t_fselect;
 
 typedef struct s_image
@@ -71,39 +73,43 @@ typedef struct  s_fractol
     t_color color;
 }           t_fractol;
 
-void    screen_display(t_fractol *data);
-int add_pixel(t_fractol *data, int x, int y, int color);
 
 // -------------------- Event ----------------------------- // 
 int keypressed(int keysym, t_fractol *data);
 int keyrelease(int keysym, t_fractol *data);
-
-// -------------------- Close windows --------------------- //
+int keymove(int keysym, t_fractol *data);
 int close_hook(t_fractol *data);
 void    close_win(t_fractol *data);
 
 // -------------------- Display --------------------------- //
+void    screen_display(t_fractol *data);
 void    image_display(t_fractol *data);
 void    set_color(t_fractol *data, int x, int y, int n);
-void    render(t_fractol *data);
+void    clear_all(t_fractol *data);
 
 // ------------------------ Utils ------------------------- //
-void    clear_all(t_fractol *data);
-int check_set(char *av, char *set);
 void    print_arg();
 void    check_arg(t_fractol *data, char **av);
 void    init_value(t_fractol *data);
-// double	ft_atod(const char *nptr);
 
 // ---------------------- Action -------------------------- //
 void    ft_zoom(t_fractol *data, double zoom);
 void    move(t_fractol *data, double move, char movement);
-int keymouse(int keysym, t_fractol *data, int x, int y);
-int mouse_pos(int keysym, t_fractol *data, int x, int y);
+int keymouse(int keysym, int x, int y, t_fractol *data);
+void    mouse_move(t_fractol *data, int x, int y, double move);
+
+// --------------------- Generator ------------------------ //
 void    change_fractal(t_fractol *data, int keysym);
-int keymove(int keysym, t_fractol *data);
-int fractal_value(t_fractol *data);
-void    ft_reinit(t_fractol *data);
+void    render(t_fractol *data);
+int add_pixel(t_fractol *data, int x, int y, int color);
+
+// --------------------- Fractal -------------------------- //
+int ft_mandelbrot(t_fractol *data, double pr, double pi);
+int ft_burning_ship(t_fractol *data, double pr, double pi);
+int ft_julia(t_fractol *data, double pr, double pi);
+
+// --------------------- Complex value -------------------- //
 void    get_complex_values(t_fractol *data);
 void    complex_julia(t_fractol *data, int keysym);
+
 #endif

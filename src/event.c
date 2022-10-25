@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 18:16:32 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:36:24 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,48 @@ int keymove(int keysym, t_fractol *data)
     return (0);
 }
 
-int keymouse(int keysym, t_fractol *data, int x, int y)
+void    ft_zoom_test(t_fractol *data, int x, int y, double zoom)
 {
-    x = data->w;
-    y = data->h;
+    double  ci;
+    double  cr;
+    (void)  x;
+    (void)  y;
+    
+    ci = data->min_iy - data->max_iy;
+    cr = data->min_rx - data->max_rx;
+    data->max_rx += (cr - zoom * cr) / 2;
+    data->min_rx += zoom * cr;
+    data->min_iy += zoom * ci;
+    data->max_iy += (ci - zoom * ci) / 2;
+}
+
+int keymouse(int keysym, int x, int y, t_fractol *data)
+{
     if (keysym == MOUSE_DOWN)
     {
         x -= data->w / 2;
         y -= data->h / 2;
-        ft_zoom(data, 0.5);
+        // ft_zoom(data, 0.5);
         if (x < 0)
-            move(data, (double)x * -1 / data->w, 'L');
+        {
+            mouse_move(data, x, y, (x * -1) / data->w);
+            printf("x < 0 = %d\n", x);
+        }
         else if (x > 0)
-            move(data, (double)x / data->w, 'R');
+        {
+            mouse_move(data, x, y, x / data->w);
+            printf("x > 0 = %d\n", x);
+        }
         if (y < 0)
-            move(data, (double)y * -1 / data->h, 'U');
+        {
+            mouse_move(data, x, y, (y * -1) / data->h);
+            printf("y < 0 = %d\n", y);
+        }
         else if (y > 0)
-            move(data, (double)y / data->h, 'D');
+        {
+            mouse_move(data, x, y, y / data->h);
+            printf("y > 0 = %d\n", y);
+        }
         render(data);
     }
     else if (keysym == MOUSE_UP)
@@ -72,8 +97,6 @@ int keymouse(int keysym, t_fractol *data, int x, int y)
     }
     return (1);
 }
-
-
 
 void    clear_all(t_fractol *data)
 {

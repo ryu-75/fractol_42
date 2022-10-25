@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 16:54:09 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/25 11:35:17 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void    print_arg()
 {
     ft_putstr_fd("Expected: ./fractol mandelbrot\n", 2);
     ft_putstr_fd("Expected: ./fractol julia\n", 2);
+    ft_putstr_fd("Expected: ./fractol burning ship\n", 2);
 }
 
 void    check_arg(t_fractol *data, char **av)
@@ -43,6 +44,8 @@ void    check_arg(t_fractol *data, char **av)
         data->fractal = MANDELBROT;
     else if (av[1] && !ft_strncmp(av[1], "julia", 5) && size == 5)
         data->fractal = JULIA;
+    else if (av[1] &&!ft_strncmp(av[1], "burning ship", 10) && size == 10)
+        data->fractal = BURNING_SHIP;
     else
     {
         ft_putstr_fd("Error: Invalid arguments\n", 2);

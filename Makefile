@@ -15,7 +15,9 @@ SRC						= $(DIR_SRC)/main.c		\
 							$(DIR_SRC)/utils.c		\
 							$(DIR_SRC)/color.c		\
 							$(DIR_SRC)/event.c		\
-							$(DIR_SRC)/action.c
+							$(DIR_SRC)/action.c		\
+							$(DIR_SRC)/generator.c	\
+							$(DIR_SRC)/complex.c
 							
 OBJ						= $(SRC:.c=.o)
 DEP						= $(SRC:.c=.d)

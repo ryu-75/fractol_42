@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:41:51 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/24 15:49:43 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:33:37 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,42 @@ void    ft_zoom(t_fractol *data, double zoom)
 {
     double  ci;
     double  cr;
-    
+
     ci = data->min_iy - data->max_iy;
     cr = data->min_rx - data->max_rx;
-    data->max_rx = data->max_rx + (cr - zoom * cr) / 2;
-    data->min_rx = data->min_rx + zoom * cr;
-    data->min_iy = data->min_iy + zoom * ci;
-    data->max_iy = data->max_iy + (ci - zoom * ci) / 2;
-    printf("IN FT_ZOOM \nmin : %f\nmax : %f\n\n", data->min_rx, data->max_rx);
+    data->max_rx += (cr - zoom * cr) / 2;
+    data->min_rx += zoom * cr;
+    data->min_iy += zoom * ci;
+    data->max_iy += (ci - zoom * ci) / 2;
+}
+
+void    mouse_move(t_fractol *data, int x, int y, double move)
+{
+    double  ci;
+    double  cr;
+    
+    ci = data->min_rx - data->max_rx;
+    cr = data->max_iy - data->min_iy;
+    if (x < 0)
+    {
+        data->max_rx -= cr * move;
+        data->min_rx -= cr * move;
+    }
+    else if (x > 0)
+    {
+        data->max_rx += cr * move;
+        data->min_rx += cr * move;
+    }
+    if (y > 0)
+    {
+        data->max_iy -= ci * move;
+        data->min_iy -= ci * move;
+    }
+    else if (y < 0)
+    {
+        data->max_iy += ci * move;
+        data->min_iy += ci * move;
+    }
 }
 
 void    move(t_fractol *data, double move, char movement)
@@ -36,22 +64,22 @@ void    move(t_fractol *data, double move, char movement)
     cr = data->max_iy - data->min_iy;
     if (movement == 'L')
     {
-        data->max_rx -= cr * move;
-        data->min_rx -= cr * move;
+        data->max_rx -= cr * move / 4;
+        data->min_rx -= cr * move / 4;
     }
     else if (movement == 'R')
     {
-        data->max_rx += cr * move;
-        data->min_rx += cr * move;
+        data->max_rx += cr * move / 4;
+        data->min_rx += cr * move / 4;
     }
     if (movement == 'D')
     {
-        data->max_iy -= ci * move;
-        data->min_iy -= ci * move;
+        data->max_iy -= ci * move / 4;
+        data->min_iy -= ci * move / 4;
     }
     else if (movement == 'U')
     {
-        data->max_iy += ci * move;
-        data->min_iy += ci * move;
+        data->max_iy += ci * move / 4;
+        data->min_iy += ci * move / 4;
     }
 }

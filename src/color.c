@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:40:21 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/26 14:29:04 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 00:20:36 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    set_color(t_fractol *data, int x, int y, int n)
     t_color color;
 
     color.p_color = rgb;
-    blue = WHITE * n / 32 * 8 + BLUE;
+    blue = WHITE * n / 32 + BLUE + PINK + BLUE;
     yellow = WHITE * n / 24 + YELLOW + WHITE;
     if (n == MAX_ITERATION)
         color.p_color[n + 1] = add_pixel(data, x, y, BLACK);

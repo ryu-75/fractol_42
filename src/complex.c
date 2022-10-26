@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:12:12 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 12:20:47 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 00:20:35 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void    get_complex_values(t_fractol *data)
     }
     else if (data->fractal == BURNING_SHIP)
     {
-        data->min_rx = -2.5;
+        data->min_rx = -2.0;
         data->max_rx = 1;
-        data->min_iy = -1;
-        data->max_iy = 1;
+        data->min_iy = -1.5;
+        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
     }
 }
 

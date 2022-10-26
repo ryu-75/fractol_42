@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:38 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 15:14:33 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 00:20:34 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-#include "../include/keysym.h"
-
-int test(int keysym, int x, int y, t_fractol *data)
-{
-    (void) data;
-    
-    x -= data->w / 2;
-    y -= data->h / 2;
-    if (keysym == MOUSE_DOWN)
-        printf("x = %d\ny = %d\n", x, y);
-    else if (keysym == MOUSE_UP)
-        printf("x = %d\ny = %d\n", x, y);
-    return (1);
-}
 
 int main(int ac, char **av)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/26 14:32:15 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 00:20:53 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,48 +46,21 @@ int keymove(int keysym, t_fractol *data)
     return (0);
 }
 
-void    ft_zoom_test(t_fractol *data, int x, int y, double zoom)
-{
-    double  ci;
-    double  cr;
-    (void)  x;
-    (void)  y;
-    
-    ci = data->min_iy - data->max_iy;
-    cr = data->min_rx - data->max_rx;
-    data->max_rx += (cr - zoom * cr) / 2;
-    data->min_rx += zoom * cr;
-    data->min_iy += zoom * ci;
-    data->max_iy += (ci - zoom * ci) / 2;
-}
-
 int keymouse(int keysym, int x, int y, t_fractol *data)
 {
     if (keysym == MOUSE_DOWN)
     {
+        ft_zoom(data, 0.05);
         x -= data->w / 2;
         y -= data->h / 2;
-        ft_zoom(data, 0.01);
         if (x < 0)
-        {
-            mouse_move(data, x, y, (x * -1) / data->w);
-            printf("x < 0 = %d\n", x);
-        }
+            mouse_move(data, x, y, (double)x * -1 / data->w);
         else if (x > 0)
-        {
-            mouse_move(data, x, y, x / data->w);
-            printf("x > 0 = %d\n", x);
-        }
+            mouse_move(data, x, y, (double)x / data->w);
         if (y < 0)
-        {
-            mouse_move(data, x, y, (y * -1) / data->h);
-            printf("y < 0 = %d\n", y);
-        }
+            mouse_move(data, x, y, (double)y * -1 / data->h);
         else if (y > 0)
-        {
-            mouse_move(data, x, y, y / data->h);
-            printf("y > 0 = %d\n", y);
-        }
+            mouse_move(data, x, y, (double)y / data->h);
     }
     else if (keysym == MOUSE_UP)
         ft_zoom(data, 1.2);

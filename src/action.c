@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:41:51 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 16:33:37 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/26 14:17:33 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void    mouse_move(t_fractol *data, int x, int y, double move)
         data->max_rx += cr * move;
         data->min_rx += cr * move;
     }
-    if (y > 0)
+    if (y < 0)
     {
         data->max_iy -= ci * move;
         data->min_iy -= ci * move;
     }
-    else if (y < 0)
+    else if (y > 0)
     {
         data->max_iy += ci * move;
         data->min_iy += ci * move;

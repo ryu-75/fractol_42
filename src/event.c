@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 16:36:24 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/26 14:32:15 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int keymouse(int keysym, int x, int y, t_fractol *data)
     {
         x -= data->w / 2;
         y -= data->h / 2;
-        // ft_zoom(data, 0.5);
+        ft_zoom(data, 0.01);
         if (x < 0)
         {
             mouse_move(data, x, y, (x * -1) / data->w);
@@ -88,13 +88,10 @@ int keymouse(int keysym, int x, int y, t_fractol *data)
             mouse_move(data, x, y, y / data->h);
             printf("y > 0 = %d\n", y);
         }
-        render(data);
     }
     else if (keysym == MOUSE_UP)
-    {
         ft_zoom(data, 1.2);
-        render(data);
-    }
+    render(data);
     return (1);
 }
 

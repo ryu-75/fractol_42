@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:45:25 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 12:56:02 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/26 14:16:03 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,14 @@ int ft_burning_ship(t_fractol *data, double pr, double pi)
     data->n = -1;
     data->zr = 0;
     data->zi = 0;
-    while (++data->n < MAX_ITERATION && (data->zr * data->zr + data->zi * data->zi) < 4.0)
+    while (++data->n < MAX_ITERATION && (pr * pr + pi * pi) < 4.0)
     {
+        if (pr * pr + pi * pi > 4.0)
+            return (0);
+        data->zr = fabs(pr);
+        data->zi = fabs(pi);
         data->tmp = data->zr * data->zr - data->zi * data->zi + pi;
-        data->zr = 2 * abs((int)data->zr * (int)data->zr) + pr;
+        data->zr = 2 * data->zr + pr;
         data->zi = data->tmp;
     }
     return (1);

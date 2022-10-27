@@ -11,13 +11,13 @@ INC						= -I ./include -I ./libft ./mlx_linux # include each folder from root
 DIR_SRC					= src
 SRC						= $(DIR_SRC)/main.c		\
 							$(DIR_SRC)/fractal.c	\
-							$(DIR_SRC)/display.c	\
 							$(DIR_SRC)/utils.c		\
 							$(DIR_SRC)/color.c		\
 							$(DIR_SRC)/event.c		\
 							$(DIR_SRC)/action.c		\
 							$(DIR_SRC)/generator.c	\
-							$(DIR_SRC)/complex.c
+							$(DIR_SRC)/complex.c	\
+							$(DIR_SRC)/init.c
 							
 OBJ						= $(SRC:.c=.o)
 DEP						= $(SRC:.c=.d)

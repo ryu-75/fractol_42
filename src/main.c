@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:38 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 00:20:34 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 12:12:41 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av)
         exit (0);
     init_value(data);
     check_arg(data, av);
-    get_complex_values(data);
+    init_complex(data);
     screen_display(data);
     image_display(data);
     render(data);
@@ -32,7 +32,7 @@ int main(int ac, char **av)
     mlx_hook(data->win, 17, 0, &close_hook, data);
     mlx_hook(data->win, 2, 1L<<0, keypressed, data);
     mlx_loop(data->ptr);
-    clear_all(data);
+    init_all(data);
     free(data);
     return (0);
 }

@@ -6,27 +6,11 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 11:35:17 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 14:17:37 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-
-void    init_value(t_fractol *data)
-{
-    data->zi = 0;
-    data->zr = 0;
-    data->tmp = 0;
-    data->mlx_img.size_line = 0;
-    data->mlx_img.bpp = 0;
-    data->mlx_img.endian = -1;
-    data->min_rx = 0;
-    data->min_iy = 0;
-    data->max_rx = 0;
-    data->max_iy = 0;
-    data->h = 900;
-    data->w = 900;
-}
 
 void    print_arg()
 {
@@ -54,8 +38,7 @@ void    check_arg(t_fractol *data, char **av)
     }
 }
 
-/*
-double  ft_atod(const char *nptr)
+double  ft_atof(const char *nptr)
 {
 	double	result;
 	double	sign;
@@ -73,9 +56,13 @@ double  ft_atod(const char *nptr)
 		nptr++;
 	while (*nptr >= '0' && *nptr <= '9')
 	{
-		result = result * 10 + *nptr - '0';
+		result = result * 10.0 + *nptr - '0';
 		nptr++;
 	}
 	return (result * sign);
 }
-*/
+
+void	print_prog()
+{
+	
+}

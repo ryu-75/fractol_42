@@ -3,42 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:12:12 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 00:20:35 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 12:02:33 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 #include "../include/keysym.h"
-
-void    get_complex_values(t_fractol *data)
-{
-    if (data->fractal == MANDELBROT)
-    {
-        data->min_rx = -2.0;
-        data->max_rx = 1;
-        data->min_iy = -1.5;
-        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-    }
-    else if (data->fractal == JULIA)
-    {
-        data->min_rx = -2.0;
-        data->max_rx = 2.0;
-        data->min_iy = -2.0;
-        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-        data->zr = -0.9966667;
-        data->zi = 0.0066667;
-    }
-    else if (data->fractal == BURNING_SHIP)
-    {
-        data->min_rx = -2.0;
-        data->max_rx = 1;
-        data->min_iy = -1.5;
-        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-    }
-}
 
 void    complex_julia(t_fractol *data, int keysym)
 {

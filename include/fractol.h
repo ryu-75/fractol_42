@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 15:01:41 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 17:48:32 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define    MAX_ITERATION 300
+# define    MAX_ITERATION 100
 # define    MLX_ERROR 1
 # define    WHITE 0x00FFFFFF
 # define    BLACK 0x00000000
@@ -29,11 +29,6 @@
 # define    PRUNE 0x007e1045
 # define    PINK 0x00E600D6
 # define    YELLOW 0x00FFE600
-
-typedef struct s_color
-{
-    int *p_color;
-}           t_color;
 
 typedef enum e_fselect
 {
@@ -65,12 +60,12 @@ typedef struct  s_fractol
     double  cr;
     double  ci;
     char    *rgb;
+    int *p_color;
     int w;
     int h;
     int n;
     int fractal;
     t_image mlx_img;
-    t_color color;
 }           t_fractol;
 
 
@@ -85,7 +80,7 @@ void    close_win(t_fractol *data);
 void    screen_display(t_fractol *data);
 void    image_display(t_fractol *data);
 void    set_color(t_fractol *data, int x, int y, int n);
-void    clear_all(t_fractol *data);
+void    init_all(t_fractol *data);
 
 // ------------------------ Utils ------------------------- //
 void    print_arg();
@@ -93,10 +88,11 @@ void    check_arg(t_fractol *data, char **av);
 void    init_value(t_fractol *data);
 
 // ---------------------- Action -------------------------- //
-void    ft_zoom(t_fractol *data, double zoom);
+void    ft_mouse_zoom(t_fractol *data, int x, int y, double zoom);
+void    ft_mouse_dezoom(t_fractol *data, int x, int y, double zoom);
 void    move(t_fractol *data, double move, char movement);
+void    ft_zoom(t_fractol *data, double zoom);
 int keymouse(int keysym, int x, int y, t_fractol *data);
-void    mouse_move(t_fractol *data, int x, int y, double move);
 
 // --------------------- Generator ------------------------ //
 void    change_fractal(t_fractol *data, int keysym);
@@ -109,7 +105,7 @@ int ft_burning_ship(t_fractol *data, double pr, double pi);
 int ft_julia(t_fractol *data, double pr, double pi);
 
 // --------------------- Complex value -------------------- //
-void    get_complex_values(t_fractol *data);
+void    init_complex(t_fractol *data);
 void    complex_julia(t_fractol *data, int keysym);
 
 #endif

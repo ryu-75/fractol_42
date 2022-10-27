@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:40:21 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 00:20:36 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 17:13:21 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,14 @@ int add_pixel(t_fractol *data, int x, int y, int color)
 void    set_color(t_fractol *data, int x, int y, int n)
 {
     int blue;
-    int yellow;
+    // int yellow;
     int rgb[MAX_ITERATION];
-    t_color color;
 
-    color.p_color = rgb;
+    data->p_color = rgb;
     blue = WHITE * n / 32 + BLUE + PINK + BLUE;
-    yellow = WHITE * n / 24 + YELLOW + WHITE;
+    // yellow = WHITE * n / 24 + YELLOW + WHITE;
     if (n == MAX_ITERATION)
-        color.p_color[n + 1] = add_pixel(data, x, y, BLACK);
-    else if (n >= MAX_ITERATION / 2 && n <= MAX_ITERATION - 1)
-        color.p_color[n + 2] = add_pixel(data, x, y, yellow);
-    else if (n >= 0 && n < MAX_ITERATION / 2 - 1)
-        color.p_color[n + 3] = add_pixel(data, x, y, blue);
+        data->p_color[1] = add_pixel(data, x, y, BLACK);
+    else if (n >= 0 && n <= MAX_ITERATION - 1)
+        data->p_color[2] = add_pixel(data, x, y, blue);
 }

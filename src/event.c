@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlorion <nlorion@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 00:20:53 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 17:49:18 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,20 @@ int keymouse(int keysym, int x, int y, t_fractol *data)
 {
     if (keysym == MOUSE_DOWN)
     {
-        ft_zoom(data, 0.05);
+        ft_mouse_zoom(data, x, y, 0.1);
         x -= data->w / 2;
         y -= data->h / 2;
-        if (x < 0)
-            mouse_move(data, x, y, (double)x * -1 / data->w);
-        else if (x > 0)
-            mouse_move(data, x, y, (double)x / data->w);
+        if (x > 0)
+            move(data, (double)x / data->w, 'R');
+        else if (x < 0)
+            move(data, (double)x * -1 / data->w, 'L');
         if (y < 0)
-            mouse_move(data, x, y, (double)y * -1 / data->h);
+            move(data, (double)y / data->h, 'D');
         else if (y > 0)
-            mouse_move(data, x, y, (double)y / data->h);
+            move(data, (double)y * -1 / data->h, 'U');
     }
     else if (keysym == MOUSE_UP)
-        ft_zoom(data, 1.2);
+        ft_mouse_dezoom(data, x, y, 0.1);
     render(data);
     return (1);
-}
-
-void    clear_all(t_fractol *data)
-{
-    mlx_destroy_image(data->ptr, data->mlx_img.img);
-    mlx_destroy_window(data->ptr, data->win);
-    mlx_destroy_display(data->ptr);
-    free(data->ptr);
 }

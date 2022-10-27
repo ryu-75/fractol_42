@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:13:40 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/25 12:20:44 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:02:17 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void    change_fractal(t_fractol *data, int keysym)
     if (keysym == TOUCH_1)
     {
         data->fractal = MANDELBROT;
-        get_complex_values(data);
+        init_complex(data);
     }
     else if (keysym == TOUCH_2)
     {
         data->fractal = JULIA;
-        get_complex_values(data);
+        init_complex(data);
     }
     else if (keysym == TOUCH_3)
     {
         data->fractal = BURNING_SHIP;
-        get_complex_values(data);
+        init_complex(data);
     }
 }
 

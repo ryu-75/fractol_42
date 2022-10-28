@@ -6,45 +6,55 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:41:51 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 17:48:24 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/28 11:58:24 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 #include "../include/keysym.h"
 
-void    ft_mouse_zoom(t_fractol *data, int x, int y, double zoom)
+void    ft_mouse_zoom(t_fractol *data, double zoom, int keysym)
 {
-    (void)x;
-    (void)y;
-    data->ci = data->min_iy - data->max_iy;
-    data->cr = data->min_rx - data->max_rx;
-    data->max_rx -= (data->cr + zoom * data->cr) / 3 * zoom;
-    data->min_rx -= (zoom * data->cr);
-    data->min_iy -= (zoom * data->ci);
-    data->max_iy -= (data->ci + zoom * data->ci) / 3 * zoom;
+    if (keysym == MOUSE_DOWN)
+    {   
+        data->ci = data->min_iy - data->max_iy;
+        data->cr = data->min_rx - data->max_rx;
+        data->max_rx += (data->cr + zoom * data->cr) / 3 * zoom;
+        data->min_rx -= (zoom * data->cr);
+        data->min_iy -= (zoom * data->ci);
+        data->max_iy += (data->ci + zoom * data->ci) / 3 * zoom;
+    }
+    else if (keysym == MOUSE_UP)
+    {     
+        data->ci = data->min_iy - data->max_iy;
+        data->cr = data->min_rx - data->max_rx;
+        data->max_rx -= (data->cr + zoom * data->cr) / 3 * zoom;
+        data->min_rx += (zoom * data->cr);
+        data->min_iy += (zoom * data->ci);
+        data->max_iy -= (data->ci + zoom * data->ci) / 3 * zoom;
+    }
 }
 
-void    ft_mouse_dezoom(t_fractol *data, int x, int y, double zoom)
+void    ft_key_zoom(t_fractol *data, double zoom, int keysym)
 {
-    (void)x;
-    (void)y;
-    data->ci = data->min_iy - data->max_iy;
-    data->cr = data->min_rx - data->max_rx;
-    data->max_rx += (data->cr + zoom * data->cr) / 3 * zoom;
-    data->min_rx += (zoom * data->cr);
-    data->min_iy += (zoom * data->ci);
-    data->max_iy += (data->ci + zoom * data->ci) / 3 * zoom;
-}
-
-void    ft_zoom(t_fractol *data, double zoom)
-{
-    data->ci = data->min_iy - data->max_iy;
-    data->cr = data->min_rx - data->max_rx;
-    data->max_rx += (data->cr - zoom * data->cr) / 2;
-    data->min_rx += zoom * data->cr;
-    data->min_iy += zoom * data->ci;
-    data->max_iy += (data->ci - zoom * data->ci) / 2;
+    if (keysym == ZOOM)
+    {
+        data->ci = data->min_iy - data->max_iy;
+        data->cr = data->min_rx - data->max_rx;
+        data->max_rx += (data->cr - zoom * data->cr) / 3 * zoom;
+        data->min_rx -= zoom * data->cr;
+        data->min_iy -= zoom * data->ci;
+        data->max_iy += (data->ci - zoom * data->ci) / 3 * zoom;
+    }
+    else if (keysym == DEZOOM)
+    {
+        data->ci = data->min_iy - data->max_iy;
+        data->cr = data->min_rx - data->max_rx;
+        data->max_rx -= (data->cr - zoom * data->cr) / 3 * zoom;
+        data->min_rx += zoom * data->cr;
+        data->min_iy += zoom * data->ci;
+        data->max_iy -= (data->ci - zoom * data->ci) / 3 * zoom;
+    }
 }
 
 void    move(t_fractol *data, double move, char movement)

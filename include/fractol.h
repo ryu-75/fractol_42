@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 17:48:32 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:22:17 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,9 @@ void    check_arg(t_fractol *data, char **av);
 void    init_value(t_fractol *data);
 
 // ---------------------- Action -------------------------- //
-void    ft_mouse_zoom(t_fractol *data, int x, int y, double zoom);
-void    ft_mouse_dezoom(t_fractol *data, int x, int y, double zoom);
+void    ft_mouse_zoom(t_fractol *data, double zoom, int keysym);
+void    ft_key_zoom(t_fractol *data, double zoom, int keysym);
 void    move(t_fractol *data, double move, char movement);
-void    ft_zoom(t_fractol *data, double zoom);
 int keymouse(int keysym, int x, int y, t_fractol *data);
 
 // --------------------- Generator ------------------------ //
@@ -105,7 +104,9 @@ int ft_burning_ship(t_fractol *data, double pr, double pi);
 int ft_julia(t_fractol *data, double pr, double pi);
 
 // --------------------- Complex value -------------------- //
-void    init_complex(t_fractol *data);
+void    init_complex(t_fractol *data, char **av);
 void    complex_julia(t_fractol *data, int keysym);
 
+
+double  ft_atof(const char *s);
 #endif

@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:38 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 12:12:41 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:22:27 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av)
         exit (0);
     init_value(data);
     check_arg(data, av);
-    init_complex(data);
+    init_complex(data, av);
     screen_display(data);
     image_display(data);
     render(data);

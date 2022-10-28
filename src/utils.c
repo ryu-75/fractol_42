@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 14:17:37 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:16:24 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,29 @@ void    check_arg(t_fractol *data, char **av)
     }
 }
 
-double  ft_atof(const char *nptr)
+double  ft_atof(const char *s)
 {
-	double	result;
-	double	sign;
+	double	decimal;
+	double	fractional;
+	int	len;
+	int	neg;
 
-	sign = 1.0;
-	result = 0.0;
-	while (*nptr == 32 || (*nptr >= 7 && *nptr <= 13))
-		nptr++;
-	if (*nptr == '-')
+	neg = 0;
+	if (s[0] == '-')
 	{
-		sign = -0.1;
-		nptr++;
+		neg = 1;
+		s++;
 	}
-	else if (*nptr == '+')
-		nptr++;
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		result = result * 10.0 + *nptr - '0';
-		nptr++;
-	}
-	return (result * sign);
+	decimal = ft_atoi(s);
+	s = strchr(s, '.');
+	s++;
+	len = ft_strlen(s);
+	fractional = ft_atoi(s);
+	fractional = pow(10, -len) * fractional;
+	decimal += fractional;
+	if (neg)
+		decimal *= -1;
+	return (decimal);
 }
 
 void	print_prog()

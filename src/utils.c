@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/29 14:58:04 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 15:35:21 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,11 @@ void	error_value(t_fractol *data)
 	    ft_putstr_fd(">>>Value can be inferior of -2 or superior of 2<<<\n", 2);
 	    ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
 	    exit (0);
-	}	
+	}
+	if (check_digit(data) != 1)
+	{
+		ft_putstr_fd(">>>Only numbers in arguments<<<\n", 2);
+		exit (0);
+	}
 }
+

@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/29 14:53:03 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 15:05:42 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define    MAX_ITERATION 200
+# define    MAX_ITERATION 100
 # define    MLX_ERROR 1
 # define    WHITE 0x00FFFFFF
 # define    BLACK 0x00000000
@@ -100,7 +100,6 @@ int keymouse(int keysym, int x, int y, t_fractol *data);
 // --------------------- Generator ------------------------ //
 void    change_fractal(t_fractol *data, int keysym);
 void    render(t_fractol *data);
-int add_pixel(t_fractol *data, int x, int y, int color);
 
 // --------------------- Fractal -------------------------- //
 int ft_mandelbrot(t_fractol *data, double pr, double pi);

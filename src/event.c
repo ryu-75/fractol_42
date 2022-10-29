@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:09:16 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/29 14:52:23 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 15:18:58 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int keymove(int keysym, t_fractol *data)
     complex_julia(data, keysym);
     change_fractal(data, keysym);
     render(data);
-    printf("%d\n", keysym);
     return (0);
 }
 

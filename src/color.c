@@ -6,14 +6,14 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:40:21 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/29 14:52:27 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 15:01:35 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 #include "../include/keysym.h"
 
-int add_pixel(t_fractol *data, int x, int y, int color)
+static int  add_pixel(t_fractol *data, int x, int y, int color)
 {
     data->rgb = data->mlx_img.addr + (y * data->mlx_img.size_line + x * data->mlx_img.bpp / 8); 
     if (data->mlx_img.endian == 0)

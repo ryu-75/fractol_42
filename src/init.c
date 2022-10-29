@@ -6,14 +6,16 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:01:57 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/28 16:24:22 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 14:24:36 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void    init_value(t_fractol *data)
+void    init_value(t_fractol *data, char **av, int ac)
 {
+    data->av = av;
+    data->ac = ac;
     data->zi = 0;
     data->zr = 0;
     data->tmp = 0;
@@ -26,39 +28,6 @@ void    init_value(t_fractol *data)
     data->max_iy = 0;
     data->h = 900;
     data->w = 900;
-}
-
-void    init_complex(t_fractol *data, char **av)
-{
-    (void) av;
-    if (data->fractal == MANDELBROT)
-    {
-        data->min_rx = -2.0;
-        data->max_rx = 1;
-        data->min_iy = -1.5;
-        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-    }
-    else if (data->fractal == JULIA)
-    {
-        data->min_rx = -2.0;
-        data->max_rx = 2.0;
-        data->min_iy = -2.0;
-        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-        data->zr = -0.9966667;
-        data->zi = 0.0066667;
-        // if (av[2] && av[3])
-        // {
-        //     data->zr = ft_atof(av[2]);
-        //     data->zi = ft_atof(av[3]);
-        // }
-    }
-    else if (data->fractal == BURNING_SHIP)
-    {
-        data->min_rx = -2.0;
-        data->max_rx = 1;
-        data->min_iy = -1.5;
-        data->max_iy = data->min_iy + (data->max_rx - data->min_rx);
-    }
 }
 
 void    screen_display(t_fractol *data)

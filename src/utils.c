@@ -6,18 +6,11 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/28 16:16:24 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 14:58:04 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-
-void    print_arg()
-{
-    ft_putstr_fd("Expected: ./fractol mandelbrot\n", 2);
-    ft_putstr_fd("Expected: ./fractol julia\n", 2);
-    ft_putstr_fd("Expected: ./fractol burning ship\n", 2);
-}
 
 void    check_arg(t_fractol *data, char **av)
 {
@@ -63,7 +56,31 @@ double  ft_atof(const char *s)
 	return (decimal);
 }
 
-void	print_prog()
+void    print_arg()
 {
-	
+    ft_putstr_fd("Expected: ./fractol mandelbrot\n", 2);
+    ft_putstr_fd("Expected: ./fractol julia\n", 2);
+    ft_putstr_fd("Expected: ./fractol burning ship\n", 2);
+}
+
+void	error_value(t_fractol *data)
+{
+	if (!ft_strchr(data->av[2], '.') || !ft_strchr(data->av[3], '.'))
+	{
+	    ft_putstr_fd(">>>Expected a double<<<\n", 2);
+	    ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
+	    exit (0);
+	}
+	if (atof(data->av[2]) > 2 || ft_atof(data->av[2]) < -2)
+	{
+	    ft_putstr_fd(">>>Value can be inferior of -2 or superior of 2<<<\n", 2);
+	    ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
+	    exit (0);
+	}
+	if (ft_atof(data->av[3]) > 2 || ft_atof(data->av[3]) < -2)
+	{
+	    ft_putstr_fd(">>>Value can be inferior of -2 or superior of 2<<<\n", 2);
+	    ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
+	    exit (0);
+	}	
 }

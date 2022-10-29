@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:13:40 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/27 13:02:17 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/10/29 14:54:07 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 void    change_fractal(t_fractol *data, int keysym)
 {
-    if (keysym == TOUCH_1)
+    if (keysym == M)
     {
         data->fractal = MANDELBROT;
         init_complex(data);
     }
-    else if (keysym == TOUCH_2)
+    else if (keysym == J)
     {
         data->fractal = JULIA;
         init_complex(data);
     }
-    else if (keysym == TOUCH_3)
+    else if (keysym == B)
     {
         data->fractal = BURNING_SHIP;
         init_complex(data);
@@ -59,7 +59,7 @@ void    render(t_fractol *data)
             pr = data->min_rx + (double)x * (data->max_rx - data->min_rx) / data->w;
             pi = data->min_iy + (double)y * (data->max_iy - data->min_iy) / data->h;
             select_fractal(data, pr, pi);
-            set_color(data, x, y, data->n);
+            set_first_color(data, x, y, data->n);
         }
     }
     mlx_put_image_to_window(data->ptr, data->win, data->mlx_img.img, 0, 0);

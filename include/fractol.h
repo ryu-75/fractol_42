@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/10/29 15:05:42 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:08:50 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,82 +32,83 @@
 
 typedef enum e_fselect
 {
-    MANDELBROT,
-    JULIA,
-    BURNING_SHIP
-}           t_fselect;
+	MANDELBROT,
+	JULIA,
+	BURNING_SHIP
+}		t_fselect;
 
 typedef struct s_image
 {
-    void    *img;
-    char    *addr;
-    int size_line;
-    int bpp;
-    int endian;
-}           t_image;
+	void	*img;
+	char	*addr;
+	int		size_line;
+	int		bpp;
+	int		endian;
+}		t_image;
 
-typedef struct  s_fractol
+typedef struct s_fractol
 {
-    void        *ptr;
-    void        *win;
-    char    **av;
-    int ac;
-    double  min_rx;
-    double  max_rx;
-    double  min_iy;
-    double  max_iy;
-    double  zi;
-    double  zr;
-    double  tmp;
-    double  cr;
-    double  ci;
-    char    *rgb;
-    int *p_color;
-    int w;
-    int h;
-    int n;
-    int fractal;
-    t_image mlx_img;
-}           t_fractol;
-
+	void	*ptr;
+	void	*win;
+	char	**av;
+	int		ac;
+	double	min_rx;
+	double	max_rx;
+	double	min_iy;
+	double	max_iy;
+	double	zi;
+	double	zr;
+	double	tmp;
+	double	cr;
+	double	ci;
+	char	*rgb;
+	int		*palette;
+	int		p_color;
+	int		w;
+	int		h;
+	int		n;
+	int		fractal;
+	t_image	mlx_img;
+}		t_fractol;
 
 // -------------------- Event ----------------------------- // 
-int keypressed(int keysym, t_fractol *data);
-int keyrelease(int keysym, t_fractol *data);
-int keymove(int keysym, t_fractol *data);
-int close_hook(t_fractol *data);
-void    close_win(t_fractol *data);
+void	close_win(t_fractol *data);
+int		keypressed(int keysym, t_fractol *data);
+int		keyrelease(int keysym, t_fractol *data);
+int		keymove(int keysym, t_fractol *data);
+int		close_hook(t_fractol *data);
 
 // -------------------- Display --------------------------- //
-void    screen_display(t_fractol *data);
-void    image_display(t_fractol *data);
-void    set_first_color(t_fractol *data, int x, int y, int n);
-void    set_second_color(t_fractol *data, int x, int y, int n);
-void    init_all(t_fractol *data);
+void	screen_display(t_fractol *data);
+void	image_display(t_fractol *data);
+void	set_first_color(t_fractol *data, int x, int y, int n);
+void	set_second_color(t_fractol *data, int x, int y, int n);
+void	init_all(t_fractol *data);
+void	init_colours(t_fractol *data);
 
 // ------------------------ Utils ------------------------- //
-void    print_arg();
-void    check_arg(t_fractol *data, char **av);
-void    init_value(t_fractol *data, char **av, int ac);
+void	print_arg(void);
+void	check_arg(t_fractol *data, char **av);
+void	init_value(t_fractol *data, char **av, int ac);
 void	error_value(t_fractol *data);
 
 // ---------------------- Action -------------------------- //
-void    ft_mouse_zoom(t_fractol *data, double zoom, int keysym);
-void    ft_key_zoom(t_fractol *data, double zoom, int keysym);
-void    move(t_fractol *data, double move, char movement);
-int keymouse(int keysym, int x, int y, t_fractol *data);
+void	ft_mouse_zoom(t_fractol *data, double zoom, int keysym);
+void	ft_key_zoom(t_fractol *data, double zoom, int keysym);
+void	move(t_fractol *data, double move, char movement);
+int		keymouse(int keysym, int x, int y, t_fractol *data);
 
 // --------------------- Generator ------------------------ //
-void    change_fractal(t_fractol *data, int keysym);
-void    render(t_fractol *data);
+void	change_fractal(t_fractol *data, int keysym);
+void	render(t_fractol *data);
 
 // --------------------- Fractal -------------------------- //
-int ft_mandelbrot(t_fractol *data, double pr, double pi);
-int ft_burning_ship(t_fractol *data, double pr, double pi);
-int ft_julia(t_fractol *data, double pr, double pi);
+int		ft_mandelbrot(t_fractol *data, double pr, double pi);
+int		ft_burning_ship(t_fractol *data, double pr, double pi);
+int		ft_julia(t_fractol *data, double pr, double pi);
 
 // --------------------- Complex value -------------------- //
-void    init_complex(t_fractol *data);
-void    complex_julia(t_fractol *data, int keysym);
-double  ft_atof(const char *s);
+void	init_complex(t_fractol *data);
+void	complex_julia(t_fractol *data, int keysym);
+double	ft_atof(const char *s);
 #endif

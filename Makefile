@@ -17,7 +17,8 @@ SRC						= $(DIR_SRC)/main.c		\
 							$(DIR_SRC)/action.c		\
 							$(DIR_SRC)/generator.c	\
 							$(DIR_SRC)/complex.c	\
-							$(DIR_SRC)/init.c
+							$(DIR_SRC)/init.c		\
+							$(DIR_SRC)/error.c
 							
 OBJ						= $(SRC:.c=.o)
 DEP						= $(SRC:.c=.d)

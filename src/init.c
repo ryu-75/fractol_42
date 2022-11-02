@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:01:57 by nlorion           #+#    #+#             */
-/*   Updated: 2022/11/01 17:54:22 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/11/02 12:09:27 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ void	init_value(t_fractol *data, char **av, int ac)
 void	init_colours(t_fractol *data)
 {
 	data->palette[0] = 0x00000000;
-	data->palette[1] = 0x00FFFFFF;
-	data->palette[2] = 0x00BD280D;
-	data->palette[3] = 0x00FC8C03;
-	data->palette[4] = 0x00C9A308;
-	data->palette[5] = 0x00278C03;
-	data->palette[6] = 0x000CAAE8;
-	data->palette[7] = 0x0053038C;
+	data->palette[1] = 0x00FC0A0A;
+	data->palette[2] = 0x00FC9712;
+	data->palette[3] = 0x00F5ED05;
+	data->palette[4] = 0x002CD615;
+	data->palette[5] = 0x0024B3F0;
+	data->palette[6] = 0x00A524F0;
 }
 
 void	screen_display(t_fractol *data)

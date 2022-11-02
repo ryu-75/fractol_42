@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:12:12 by nlorion           #+#    #+#             */
-/*   Updated: 2022/11/01 18:42:30 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/11/02 17:04:13 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ void	complex_julia(t_fractol *data, int keysym)
 
 static void	set_julia_complex(t_fractol *data)
 {
-	if (!(data->ac < 3))
+	if ((data->ac < 3) || data->ac == 3)
 	{
+		ft_putstr_fd(">>>Write your own value to change Julia<<<\n", 2);
+		ft_putstr_fd("Ex : -0.9966667 0.0066667\n", 2);
 		data->zr = -0.9966667;
 		data->zi = 0.0066667;
 	}
 	else if (data->ac > 2)
 	{
-		error_value(data);
+		return_error(data);
 		data->zr = ft_atof(data->av[2]);
 		data->zi = ft_atof(data->av[3]);
 	}

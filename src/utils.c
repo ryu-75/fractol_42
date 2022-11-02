@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:31:19 by nlorion           #+#    #+#             */
-/*   Updated: 2022/11/01 18:47:53 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/11/02 16:26:58 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	check_arg(t_fractol *data, char **av)
 	{
 		ft_putstr_fd("Error: Invalid arguments\n", 2);
 		print_arg();
+		clean_all(data);
 		exit(0);
 	}
 }
@@ -56,13 +57,6 @@ double	ft_atof(const char *s)
 	return (decimal);
 }
 
-void	print_arg(void)
-{
-	ft_putstr_fd("Expected: ./fractol mandelbrot\n", 2);
-	ft_putstr_fd("Expected: ./fractol julia\n", 2);
-	ft_putstr_fd("Expected: ./fractol burning ship\n", 2);
-}
-
 int	check_value(char *av)
 {
 	int	i;
@@ -77,30 +71,8 @@ int	check_value(char *av)
 	return (1);
 }
 
-void	error_value(t_fractol *data)
+void	clean_all(t_fractol *data)
 {
-	if (!ft_strchr(data->av[2], '.') || !ft_strchr(data->av[3], '.'))
-	{
-		ft_putstr_fd(">>>Expected a double<<<\n", 2);
-		ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
-		exit (0);
-	}
-	if (atof(data->av[2]) > 2 || ft_atof(data->av[2]) < -2)
-	{
-		ft_putstr_fd(">>>Value can be inferior of -2 or superior of 2<<<\n", 2);
-		ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
-		exit (0);
-	}
-	if (ft_atof(data->av[3]) > 2 || ft_atof(data->av[3]) < -2)
-	{
-		ft_putstr_fd(">>>Value can be inferior of -2 or superior of 2<<<\n", 2);
-		ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
-		exit (0);
-	}
-	if (!check_value(data->av[2]) || !check_value(data->av[3]))
-	{
-		ft_putstr_fd(">>>Take only numbers<<<\n", 2);
-		ft_putstr_fd("Try : -0.9966667 0.0066667\n", 2);
-		exit (0);
-	}
+	free(data->palette);
+	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: nlorion <nlorion@42.student.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:54:50 by nlorion           #+#    #+#             */
-/*   Updated: 2022/11/01 18:08:50 by nlorion          ###   ########.fr       */
+/*   Updated: 2022/11/02 16:04:49 by nlorion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@
 
 # define    MAX_ITERATION 100
 # define    MLX_ERROR 1
-# define    WHITE 0x00FFFFFF
-# define    BLACK 0x00000000
-# define    BLUE 0x000CAAE8
-# define    PINK 0x00E600D6
-# define    RED 0x00BD280D
-# define    YELLOW 0x00C9A308
 
 typedef enum e_fselect
 {
@@ -83,14 +77,19 @@ void	screen_display(t_fractol *data);
 void	image_display(t_fractol *data);
 void	set_first_color(t_fractol *data, int x, int y, int n);
 void	set_second_color(t_fractol *data, int x, int y, int n);
-void	init_all(t_fractol *data);
+
+// ------------------- Initialization --------------------- //
+void	init_value(t_fractol *data, char **av, int ac);
 void	init_colours(t_fractol *data);
+void	init_all(t_fractol *data);
 
 // ------------------------ Utils ------------------------- //
 void	print_arg(void);
 void	check_arg(t_fractol *data, char **av);
-void	init_value(t_fractol *data, char **av, int ac);
-void	error_value(t_fractol *data);
+void	clean_all(t_fractol *data);
+int		check_value(char *av);
+void	return_error(t_fractol *data);
+double	ft_atof(const char *s);
 
 // ---------------------- Action -------------------------- //
 void	ft_mouse_zoom(t_fractol *data, double zoom, int keysym);
@@ -108,7 +107,6 @@ int		ft_burning_ship(t_fractol *data, double pr, double pi);
 int		ft_julia(t_fractol *data, double pr, double pi);
 
 // --------------------- Complex value -------------------- //
-void	init_complex(t_fractol *data);
 void	complex_julia(t_fractol *data, int keysym);
-double	ft_atof(const char *s);
+void	init_complex(t_fractol *data);
 #endif

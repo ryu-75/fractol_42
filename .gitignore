@@ -1,2 +1,5 @@
+# Object & Depedencies
 *.o
 *.d
+# VSC Module
+.vscode

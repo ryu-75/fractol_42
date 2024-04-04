@@ -1,6 +1,0 @@
-[submodule "Libft"]
-	path = Libft
-	url = https://github.com/ryu-75/Libft42.git
-[submodule "mlxLinux"]
-	path = mlxLinux
-	url = https://github.com/42Paris/minilibx-linux.git

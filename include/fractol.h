@@ -13,9 +13,9 @@
 #ifndef     FRACTOL_H
 # define    FRACTOL_H
 
-# include "../Libft/libft.h"
-# include "../minilibx_linux/mlx.h"
-# include "../minilibx_linux/mlx_int.h"
+# include "../libft/libft.h"
+# include "../mlx_linux/mlx.h"
+# include "../mlx_linux/mlx_int.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <fcntl.h>

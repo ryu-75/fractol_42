@@ -1,59 +1,66 @@
-PREFIXE					= fractol
-EXEC					= $(PREFIXE)
+PREFIXE    = fractol
+EXEC       = $(PREFIXE)
 
 # ------------------- [Library] ---------------------------------------
 
-MLX						= mlx/Makefile
-INC						= -I ./include -I ./libft ./mlx_linux # include each folder from root
+MLX        = mlx_linux/libmlx.a
+LIBFT      = libft/libft.a
 
 # ------------------- [Source] ----------------------------------------
 
-DIR_SRC					= src
-SRC						= $(DIR_SRC)/main.c		\
-							$(DIR_SRC)/fractal.c	\
-							$(DIR_SRC)/utils.c		\
-							$(DIR_SRC)/color.c		\
-							$(DIR_SRC)/event.c		\
-							$(DIR_SRC)/action.c		\
-							$(DIR_SRC)/generator.c	\
-							$(DIR_SRC)/complex.c	\
-							$(DIR_SRC)/init.c		\
-							$(DIR_SRC)/error.c
-							
-OBJ						= $(SRC:.c=.o)
-DEP						= $(SRC:.c=.d)
-						
-%.o						: %.c
-						$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
-						$(CC) -c $(CFLAGS) $*.c -o $*.o
-						$(CC) -MM $(CFLAGS) $*.c -o $*.d
+DIR_SRC    = src/
+SRC        = main.c        \
+             fractal.c     \
+             utils.c       \
+             color.c       \
+             event.c       \
+             action.c      \
+             generator.c   \
+             complex.c     \
+             init.c        \
+             error.c
 
-
-$(EXEC)					: libft/libft.a $(OBJ)
-						$(CC) $(OBJ) -L libft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(EXEC)
+SRCS       = $(addprefix $(DIR_SRC), $(SRC))
+OBJ_DIR    = obj/
+OBJS       = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 # ------------------- [Compilation] ----------------------------------
 
-CC						= cc
+CC         = cc
+CFLAGS     = -g -Wall -Wextra -Werror
 
-CFLAGS					= -g -Wall -Wextra -Werror 	
+all        : $(MLX) $(LIBFT) $(EXEC)
 
-all						: $(EXEC)
+$(MLX)     :
+			@echo "Making MiniLibx..."
+			@make -sC mlx_linux
 
-libft/libft.a			:
-						make -C libft
+$(LIBFT)   :
+			@echo "Making Libft..."
+			@make -sC libft
 
-clean					:
-						rm -rf $(OBJ) $(DEP)
-						make clean -C libft
+$(EXEC)    : $(OBJS)
+			@echo "Compiling fractol..."
+			@$(CC) $(CFLAGS) -o $(EXEC) $(OBJS) $(MLX) $(LIBFT) -L/usr/lib -lXext -lX11 -lm
+			@echo "Fractol ready"
 
+$(OBJ_DIR) :
+				@mkdir -p $(OBJ_DIR)
 
-fclean					: clean
-						rm -rf $(EXEC)
-						rm -rf object
-						make fclean -C libft
+$(OBJ_DIR)%.o: $(DIR_SRC)%.c | $(OBJ_DIR)
+				@$(CC) $(CFLAGS) -c $< -o $@ -I./include -I./libft -I./mlx_linux
 
-re						: fclean
-						@make all
+clean      :
+			@echo "Removing .o object files..."
+			@rm -rf $(OBJ_DIR)
+			@make clean -C libft/
+			@make clean -C mlx_linux/
 
-.PHONY					= all clean fclean re object
+fclean     :	clean
+				@echo "Removing fractol..."
+				@rm -rf $(EXEC)
+				@rm -rf libft/libft.a
+
+re         : fclean all
+
+.PHONY     : all clean fclean re
